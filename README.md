@@ -1,4 +1,4 @@
-# Portfolio of MAKKIE
+# Portfolio of LILY
 
 Mubashshira Ali Khan
 Data & AI Practitioner
