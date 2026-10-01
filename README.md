@@ -1,4 +1,4 @@
-# Portfolio of MAK
+# Portfolio of MAKKIE
 
 Mubashshira Ali Khan
 Data & AI Practitioner
