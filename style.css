@@ -1,0 +1,742 @@
+/* ==========================================================
+   Mubashshira Ali Khan — portfolio stylesheet
+   Palette: light blue + pink, with a deep slate for readable text.
+     --blue   #C6E0F4  light blue — header, hero, contact, footer
+     --sky    #EAF4FB  paler tint of the blue — page ground
+     --pink   #F28DB2  pink — buttons, borders, markers
+     --blush  #FDEAF1  paler tint of the pink — alternate sections
+     --pink-deep #A92C60  darker pink — small text/lines that need contrast
+     --ink    #1E2B45  deep slate — text only
+   White is used only as a card surface.
+   ========================================================== */
+
+:root {
+  --ink: #1E2B45;
+  --blue: #C6E0F4;
+  --sky: #EAF4FB;
+  --pink: #F28DB2;
+  --blush: #FDEAF1;
+  --pink-deep: #A92C60;
+  --white: #FFFFFF;
+
+  --ink-soft: rgba(30, 43, 69, 0.78);
+  --ink-line: rgba(30, 43, 69, 0.18);
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --wrap: 68rem;
+  --nav-h: 4.25rem;
+}
+
+/* ---------- Base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--nav-h) + 0.5rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--sky);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3, h4, p, ul, dl, dd { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+a { color: inherit; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-inline: 2.5rem;
+}
+
+/* Light-blue surfaces: header, hero, contact, footer */
+.tint {
+  background: var(--blue);
+  color: var(--ink);
+}
+
+/* ---------- Accessibility ---------- */
+
+:focus-visible {
+  outline: 3px solid var(--pink-deep);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--white);
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus { top: 0.75rem; }
+
+/* ---------- Navigation ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: var(--nav-h);
+}
+
+.brand {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.nav-links a {
+  display: block;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.93rem;
+  text-decoration: none;
+  color: var(--ink-soft);
+  border-bottom: 2px solid transparent;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--pink-deep);
+}
+
+/* ---------- Buttons ---------- */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid var(--ink);
+  font: inherit;
+  font-size: 0.97rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.18s ease, color 0.18s ease,
+              border-color 0.18s ease, transform 0.18s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+/* Pink button, dark text */
+.btn-primary {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+/* Outline button */
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: var(--ink);
+}
+
+/* Placeholder buttons: an anchor with no href is shown as inactive.
+   Adding an href in index.html activates it automatically. */
+.btn:not([href]),
+.btn:not([href]):hover {
+  background: transparent;
+  border: 2px dashed var(--ink-line);
+  color: var(--ink-soft);
+  transform: none;
+  cursor: default;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.btn[href] ~ .note { display: none; }
+
+/* ---------- Hero ---------- */
+
+.hero {
+  padding-block: 6.5rem 6rem;
+}
+
+.hero-inner > * {
+  animation: rise 0.7s ease both;
+}
+
+.hero-inner > :nth-child(2) { animation-delay: 0.08s; }
+.hero-inner > :nth-child(3) { animation-delay: 0.16s; }
+.hero-inner > :nth-child(4) { animation-delay: 0.24s; }
+.hero-inner > :nth-child(5) { animation-delay: 0.32s; }
+.hero-inner > :nth-child(6) { animation-delay: 0.42s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  margin-bottom: 1.4rem;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 6.2vw + 0.5rem, 4.25rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.role {
+  margin-top: 0.9rem;
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 1.2vw + 0.9rem, 1.6rem);
+  color: var(--ink);
+}
+
+.rule {
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin: 1.8rem 0;
+  background: var(--pink-deep);
+}
+
+.lead {
+  max-width: 38rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 2.4rem;
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  padding-block: 5.5rem;
+}
+
+.section-alt {
+  background: var(--blush);
+  border-block: 1px solid var(--ink-line);
+}
+
+.kicker {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.7rem;
+}
+
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 1.6rem;
+  height: 4px;
+  margin-right: 0.7rem;
+  vertical-align: middle;
+  background: var(--pink);
+}
+
+h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.2vw + 1rem, 2.2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  max-width: 40rem;
+  margin-bottom: 2.5rem;
+  text-wrap: balance;
+}
+
+h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ---------- About ---------- */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.about-text p { max-width: 36rem; }
+.about-text p + p { margin-top: 1.1rem; }
+
+.glance {
+  background: var(--white);
+  border: 1px solid var(--ink-line);
+  border-top: 4px solid var(--pink);
+  padding: 1.6rem 1.7rem 1.8rem;
+}
+
+.glance h3 { margin-bottom: 1.2rem; }
+
+.glance dt {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 1.15rem;
+}
+
+.glance dt:first-of-type { margin-top: 0; }
+
+.glance dd { margin-top: 0.3rem; }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.chips li {
+  font-size: 0.88rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--ink-line);
+  background: var(--sky);
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+              transform 0.18s ease;
+}
+
+.chips li:hover {
+  background: var(--pink);
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+
+/* ---------- Skills ---------- */
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.25rem;
+  counter-reset: skill;
+}
+
+.skill-grid li {
+  grid-column: span 2;
+  counter-increment: skill;
+  background: var(--white);
+  border: 1px solid var(--ink-line);
+  border-top: 4px solid var(--pink);
+  padding: 1.5rem 1.6rem 1.7rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-top-color 0.2s ease;
+}
+
+.skill-grid li:nth-child(n+4) { grid-column: span 3; }
+
+.skill-grid li::before {
+  content: counter(skill, decimal-leading-zero);
+  display: block;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--pink-deep);
+  margin-bottom: 0.7rem;
+}
+
+.skill-grid li:hover {
+  transform: translateY(-4px);
+  border-top-color: var(--blue);
+  box-shadow: 0 12px 26px rgba(30, 43, 69, 0.12);
+}
+
+.skill-grid h3 { margin-bottom: 0.55rem; }
+
+.skill-grid p {
+  font-size: 0.97rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Projects ---------- */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--ink-line);
+  border-left: 4px solid var(--pink);
+  padding: 1.9rem 1.9rem 1.8rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-width 0.2s ease;
+}
+
+.project:hover {
+  transform: translateY(-4px);
+  border-left-width: 9px;
+  box-shadow: 0 14px 30px rgba(30, 43, 69, 0.13);
+}
+
+.project-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink-deep);
+  margin-bottom: 0.5rem;
+}
+
+.project h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.8rem;
+}
+
+.project h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 1.4rem 0 0.4rem;
+}
+
+.tech li {
+  display: inline-block;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--ink-line);
+}
+
+.tech-placeholder {
+  border-style: dashed !important;
+  color: var(--ink-soft);
+}
+
+.project .actions {
+  margin-top: auto;
+  padding-top: 1.8rem;
+}
+
+/* ---------- Resume ---------- */
+
+.resume {
+  background: var(--blush);
+  border-block: 1px solid var(--ink-line);
+  padding-block: 3.5rem;
+}
+
+.resume-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem 3rem;
+}
+
+.resume h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+/* ---------- Contact ---------- */
+
+.contact h2 { margin-bottom: 1rem; }
+
+.contact-intro {
+  max-width: 36rem;
+  color: var(--ink-soft);
+  margin-bottom: 2.4rem;
+}
+
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+.contact-list li {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--ink-line);
+  padding: 1.15rem 1.35rem 1.25rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-list li:hover {
+  background: var(--white);
+  border-color: var(--pink-deep);
+  transform: translateY(-3px);
+}
+
+.label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+}
+
+.contact-link {
+  display: inline-block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--pink-deep);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+  transition: color 0.18s ease, text-decoration-color 0.18s ease;
+}
+
+.contact-link:hover { color: var(--pink-deep); }
+
+/* Placeholder links (no href yet) look inactive and clearly marked */
+.contact-link:not([href]),
+.contact-link:not([href]):hover {
+  color: var(--ink-soft);
+  font-weight: 400;
+  text-decoration: none;
+  font-style: italic;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--ink-line);
+  padding-block: 1.6rem;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.site-footer a {
+  text-decoration: none;
+  border-bottom: 2px solid var(--pink-deep);
+  transition: color 0.18s ease;
+}
+
+.site-footer a:hover { color: var(--ink); }
+
+/* ---------- GitHub integration ---------- */
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  fill: currentColor;
+}
+
+.icon-lg {
+  width: 3rem;
+  height: 3rem;
+  color: var(--ink);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nav-links .nav-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--ink-line);
+}
+
+.nav-links .nav-github:hover .icon { transform: scale(1.12); }
+
+.nav-github .icon { transition: transform 0.18s ease; }
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.github-card {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-bottom: 1rem;
+  padding: 1.6rem 1.75rem;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--ink-line);
+  border-left: 4px solid var(--pink);
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.github-card:hover {
+  background: var(--white);
+  border-color: var(--pink-deep);
+  transform: translateY(-3px);
+}
+
+.github-text { flex: 1 1 auto; min-width: 0; }
+
+.github-text h3 { margin-bottom: 0.3rem; }
+
+.github-text p { color: var(--ink-soft); }
+
+.github-handle {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink) !important;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 62rem) {
+  .wrap { padding-inline: 2rem; }
+  .hero { padding-block: 5rem 4.5rem; }
+  .section { padding-block: 4.5rem; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .skill-grid { grid-template-columns: repeat(2, 1fr); }
+  .skill-grid li,
+  .skill-grid li:nth-child(n+4) { grid-column: span 1; }
+  .skill-grid li:last-child { grid-column: span 2; }
+
+  .project-grid { grid-template-columns: 1fr; }
+
+  .github-card { flex-wrap: wrap; }
+}
+
+/* Tuned for ~375px phones */
+@media (max-width: 30rem) {
+  :root { --nav-h: 3.5rem; }
+
+  body { font-size: 1rem; }
+
+  .wrap { padding-inline: 1.25rem; }
+
+  .brand { display: none; }
+  .nav { justify-content: center; }
+  .nav-links { width: 100%; justify-content: space-between; gap: 0; }
+  .nav-links a { padding: 0.5rem 0.4rem; font-size: 0.86rem; }
+  .nav-links .nav-github { margin-left: 0; padding: 0.7rem 0.55rem; border-left: 0; }
+  .gh-text { display: none; }
+
+  .hero { padding-block: 3.5rem 3.5rem; }
+  .eyebrow { font-size: 0.74rem; letter-spacing: 0.09em; margin-bottom: 1.1rem; }
+  .rule { margin: 1.4rem 0; }
+  .lead { font-size: 1.05rem; margin-bottom: 2rem; }
+
+  .actions .btn { flex: 1 1 100%; }
+
+  .section { padding-block: 3.25rem; }
+  h2 { margin-bottom: 1.75rem; }
+
+  .glance { padding: 1.3rem 1.25rem 1.5rem; }
+
+  .skill-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .skill-grid li:last-child { grid-column: span 1; }
+  .skill-grid li { padding: 1.25rem 1.25rem 1.4rem; }
+
+  .project { padding: 1.4rem 1.25rem 1.4rem; }
+
+  .resume { padding-block: 2.75rem; }
+
+  .contact-list { grid-template-columns: 1fr; }
+
+  .github-card { flex-direction: column; align-items: flex-start; gap: 1.1rem; padding: 1.3rem 1.25rem 1.4rem; }
+  .github-card .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
